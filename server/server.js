@@ -21,6 +21,15 @@ app.post('/todos', (req, res) => {
   })
 });
 
+//CRUD = create, read, update, delete
+app.get('/todos', (req, res) => {
+  Todo.find().then((todos) => {
+    res.send({todos});
+  }, (error) => {
+    res.status(400).send(error);
+  });
+});
+
 
 
 // GET /todos/12321

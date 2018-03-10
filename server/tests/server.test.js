@@ -28,11 +28,33 @@ describe('POST /todos', () => {
 
         Todo.find().then((todos) => {
           expect(todos.length).toBe(1);
-          expect(todos.text).toBe(text);
+          expect(todos[0].text).toBe(text);
           done();
         }).catch((error) => {
           done(error);
         });
       })
   });
+
+  it('should not create todo with invalid body data', (done) => {
+    let text = "Test";
+
+    request(app)
+      .post('/todos')
+      .send({})
+      .expect(400)
+      .end((error, res) => {
+        if (error) {
+          return done(error);
+        }
+
+        Todo.find().then((todos) => {
+          expect(todos.length).toBe(0);
+          done();
+        }).catch((error) => {
+          done(error);
+        });
+      })
+  });
+
 });
