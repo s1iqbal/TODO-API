@@ -1,2 +1,3 @@
 node_modules/
 playground/authentication.js
+server/db/authentication.js
